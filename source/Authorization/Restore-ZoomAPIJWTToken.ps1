@@ -4,7 +4,7 @@ function Restore-ZoomAPIJWTToken {
         $Path
     )
 
-    $c = cat $Path
+    $c = Get-Content $Path
     $ts = $c | ConvertTo-SecureString | Unlock-SecureString
 
     $t = $ts | ConvertFrom-Json

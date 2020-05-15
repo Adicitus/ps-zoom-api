@@ -282,9 +282,9 @@ function New-ZoomAPIMeeting {
         RegistrationContactEmail = { param($v) $body.settings."contact_email" = $v }
     }
 
-    $PSBoundParameters.Keys | ? {
+    $PSBoundParameters.Keys | Where-Object {
         $map.ContainsKey($_)
-    } | % {
+    } | ForEach-Object {
         . $map.$_ $PSBoundParameters[$_]
     }
 
