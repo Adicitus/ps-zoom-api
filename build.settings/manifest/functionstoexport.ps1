@@ -10,4 +10,7 @@
     "Set-ZoomAPIMeeting"
 
     "Get-ZoomAPIUser"
+    "New-ZoomAPIUser"
+    "Remove-ZoomAPIUser"
+    "Set-ZoomAPIUser"
 )
