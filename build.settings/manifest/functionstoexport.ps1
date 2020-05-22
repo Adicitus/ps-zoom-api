@@ -3,6 +3,11 @@
     "Save-ZoomAPIJWTToken"
     "Restore-ZoomAPIJWTToken"
 
+    "Add-ZoomAPIGroupMembers"
+    "Get-ZoomAPIGroup"
+    "Get-ZoomAPIGroupMembers"
+    "Remove-ZoomAPIGroupMember"
+
     "Get-ZoomAPIMeeting"
     "Get-ZoomAPIMeetingInvitation"
     "New-ZoomAPIMeeting"
