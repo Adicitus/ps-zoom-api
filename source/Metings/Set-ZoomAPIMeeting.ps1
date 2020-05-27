@@ -74,8 +74,8 @@ function Set-ZoomAPIMeeting {
         [bool]$EnforceLogin,
         [Parameter(Mandatory=$false, HelpMessage="Only allow registered users with the given domain(s) to join the meeting.")]
         [string]$EnforceLoginDomains,
-        [Parameter(Mandatory=$false, HelpMessage="List of alternative hosts (email-addresses, separated by ';').")]
-        [string]$AlternativeHosts,
+        [Parameter(Mandatory=$false, HelpMessage="List of alternative hosts (email-addresses).")]
+        [string[]]$AlternativeHosts,
         [Parameter(Mandatory=$false, HelpMessage="Close registration after event date.")]
         [bool]$CloseRegistration,
         [Parameter(Mandatory=$false, HelpMessage="Enable waiting room.")]
@@ -272,7 +272,7 @@ function Set-ZoomAPIMeeting {
 
         EnforceLogin        = { param($v) $body.settings."enforce_login" = $v }
         EnforceLoginDomains = { param($v) $body.settings."enforce_login_domains" = $v }
-        AlternativeHosts    = { param($v) $body.settings."alternative_host" = $v }
+        AlternativeHosts    = { param($v) $body.settings."alternative_hosts" = $v -join "," }
         CloseRegistration   = { param($v) $body.settings."close_registration" = $v }
         EnableWaitingRoom   = { param($v) $body.settings."waiting_room" = $v }
         RegistrationContactName = { param($v) $body.settings."contact_name" = $v }
