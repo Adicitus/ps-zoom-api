@@ -19,4 +19,5 @@
     "Remove-ZoomAPIUser"
     "Reset-ZoomAPIUserPassword"
     "Set-ZoomAPIUser"
+    "Set-ZoomAPIUserActivationStatus"
 )
