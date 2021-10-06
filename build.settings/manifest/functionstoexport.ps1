@@ -1,4 +1,6 @@
 @(
+    "Invoke-ZoomAPIRequest"
+
     "New-ZoomAPIJWTToken"
     "Save-ZoomAPIJWTToken"
     "Restore-ZoomAPIJWTToken"
