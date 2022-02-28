@@ -28,32 +28,16 @@ function Get-ZoomAPIUser {
     switch ($PSCmdlet.ParameterSetName) {
         'ListUsers'  {
 
-            $headers = @{
-                'Content-Type' = 'application/json'
-            }
-
-            $queryParams = [System.Collections.ArrayList]::new()
-
             $options = @{
-                'Status'        = { param($v) $queryParams.Add('status={0}' -f  $v.toLower()) }
-                'PageSize'      = { param($v) $queryParams.Add('page_size={0}' -f  $v) }
-                'PageNumber'    = { param($v) $queryParams.Add('page_number={0}' -f  $v)  }
-                'RoleId'        = { param($v) $queryParams.Add('role_id={0}' -f  $v) }
-                'IncludeFields' = { param($v) $queryParams.Add('include_fields={0}' -f  $v.toLower())  }
-                'NextPageToken' = { param($v) $queryParams.Add('next_page_token={0}' -f  $v) }
+                'Status'        = { param($v) 'status={0}' -f  $v.toLower() }
+                'PageSize'      = { param($v) 'page_size={0}' -f  $v }
+                'PageNumber'    = { param($v) 'page_number={0}' -f  $v  }
+                'RoleId'        = { param($v) 'role_id={0}' -f  $v }
+                'IncludeFields' = { param($v) 'include_fields={0}' -f  $v.toLower()  }
+                'NextPageToken' = { param($v) 'next_page_token={0}' -f  $v }
             }
 
-            foreach ($option in $options.Keys) {
-                if ($PSBoundParameters.ContainsKey($option)) {
-                    & $options[$option] $PSBoundParameters[$option] | Out-Null
-                }
-            }
-
-            if ($queryParams.count -gt 0) {
-                $endpoint += '?' + ($queryParams -join "&")
-            }
-
-            return Invoke-ZoomAPIRequest -Token $Token -Method Get -Endpoint $endpoint -Headers $headers
+            return Invoke-ZoomAPIRequest -Token $Token -Method Get -Endpoint $endpoint -QueryParamMap $options -QueryParamSrc $PSBoundParameters
         }
 
         'SingleSUer' {

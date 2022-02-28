@@ -22,26 +22,14 @@ function Get-ZoomAPIMeetingRegistrants {
 
     $endpoint = "meetings/{0}/registrants" -f $MeetingId
 
-    $queryParams = [System.Collections.ArrayList]::new()
-
     $options = @{
-        'OccurenceId'   = { param($v) $queryParams.Add('occurrence_id={0}' -f  $v) }
-        'Status'        = { param($v) $queryParams.Add('status={0}' -f  $v.toLower()) }
-        'PageSize'      = { param($v) $queryParams.Add('page_size={0}' -f  $v) }
-        'PageNumber'    = { param($v) $queryParams.Add('page_number={0}' -f  $v)  }
-        'NextPageToken' = { param($v) $queryParams.Add('next_page_token={0}' -f  $v) }
+        'OccurenceId'   = { param($v) 'occurrence_id={0}' -f  $v }
+        'Status'        = { param($v) 'status={0}' -f  $v.toLower() }
+        'PageSize'      = { param($v) 'page_size={0}' -f  $v }
+        'PageNumber'    = { param($v) 'page_number={0}' -f  $v  }
+        'NextPageToken' = { param($v) 'next_page_token={0}' -f  $v }
     }
 
-    foreach ($option in $options.Keys) {
-        if ($PSBoundParameters.ContainsKey($option)) {
-            & $options[$option] $PSBoundParameters[$option] | Out-Null
-        }
-    }
-
-    if ($queryParams.count -gt 0) {
-        $endpoint += '?' + ($queryParams -join "&")
-    }
-
-    Invoke-ZoomAPIRequest -Method Get -Endpoint $Endpoint -Token $Token
+    Invoke-ZoomAPIRequest -Method Get -Endpoint $Endpoint -Token $Token -QueryParamMap $options -QueryParamSrc $PSBoundParameters
 
 }
