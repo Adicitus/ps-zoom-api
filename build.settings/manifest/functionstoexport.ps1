@@ -12,6 +12,7 @@
 
     "Get-ZoomAPIMeeting"
     "Get-ZoomAPIMeetingInvitation"
+    "Get-ZoomAPIMeetingRegistrants"
     "New-ZoomAPIMeeting"
     "Remove-ZoomAPIMeeting"
     "Set-ZoomAPIMeeting"
