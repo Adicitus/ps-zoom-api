@@ -26,7 +26,7 @@ function Invoke-ZoomAPIRequest {
     foreach ($param in $QueryParamMap.Keys) {
         if ($QueryParamSrc.ContainsKey($param)) {
             $p = & $options[$param] $QueryParamSrc[$param]
-            "TRANSFORM: {0}({1}) => '{2}'" -f $param, $QueryParamSrc[$param], $p | Write-Debug
+            "ZoomAPI TRANSFORM {0}({1}) => '{2}'" -f $param, $QueryParamSrc[$param], $p | Write-Debug
             $queryParams.Add($p) | Out-Null
         }
     }
@@ -54,7 +54,7 @@ function Invoke-ZoomAPIRequest {
     }
 
     $r = try {
-        '{0,-7} {1}' -f $requestArgs.method.toUpper(), $requestArgs.uri | Write-Debug
+        'ZoomAPI {0,-9} {1}' -f $requestArgs.method.toUpper(), $requestArgs.uri | Write-Debug
         Invoke-WebRequest @requestArgs -UseBasicParsing
     } catch {
         return $_
@@ -64,19 +64,15 @@ function Invoke-ZoomAPIRequest {
         _raw = $r
     }
 
-    switch ($r.GetType().Name) {
-        "ErrorRecord" {
+    switch -Regex ($r.GetType().Name) {
+        "^ErrorRecord$" {
             $d = $r.ErrorDetails.message | ConvertFrom-Json
             $response.StatusCode = $d.code
             $response.Content = $d.message
         }
 
-        "BasicHtmlWebResponseObject" {
-            $response.StatusCode = $r.StatusCode
-            $response.Content = $r.Content | ConvertFrom-UnicodeEscapedString | ConvertFrom-Json
-        }
+        "^(BasicHtmlWebResponseObject|WebResponseObject)$" {
 
-        "WebResponseObject" {
             $response.StatusCode = $r.StatusCode
             $response.Content = $r.Content | ConvertFrom-UnicodeEscapedString | ConvertFrom-Json
         }
@@ -86,6 +82,10 @@ function Invoke-ZoomAPIRequest {
         }
     }
 
-    return $response
+    if ($script:ResponseDetails -eq [ResponseStyle]::ContentOnly) {
+        return $response.content
+    } else {
+        return $response
+    }
 
 }
