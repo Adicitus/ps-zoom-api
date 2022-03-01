@@ -57,7 +57,7 @@ function Invoke-ZoomAPIRequest {
         '{0,-7} {1}' -f $requestArgs.method.toUpper(), $requestArgs.uri | Write-Debug
         Invoke-WebRequest @requestArgs -UseBasicParsing
     } catch {
-        $_
+        return $_
     }
 
     $response = @{
