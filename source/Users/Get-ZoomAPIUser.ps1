@@ -40,7 +40,7 @@ function Get-ZoomAPIUser {
             return Invoke-ZoomAPIRequest -Token $Token -Method Get -Endpoint $endpoint -QueryParamMap $options -QueryParamSrc $PSBoundParameters
         }
 
-        'SingleSUer' {
+        'SingleUser' {
             $endpoint += "/{0}" -f $UserID
             return Invoke-ZoomAPIRequest -Token $Token -Method Get -Endpoint $endpoint
         }
