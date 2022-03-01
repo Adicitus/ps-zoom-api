@@ -7,7 +7,7 @@ function Set-ZoomAPIGroup {
         [string]$Name
     )
 
-    $entrypoint = "groups"
+    $endpoint = "groups"
 
     $headers = @{
         "Content-Type" = "application/json"
