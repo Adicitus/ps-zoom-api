@@ -1,7 +1,7 @@
 function Reset-ZoomAPIUserPassword {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true, HelpMessage="Email-address or ID of the user to update.")]
         [String]$UserID,

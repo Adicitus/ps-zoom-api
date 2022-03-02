@@ -2,6 +2,8 @@
     "Invoke-ZoomAPIRequest"
     "Set-ZoomAPIResponseStyle"
     "Get-ZoomAPIResponseStyle"
+    "Set-ZoomAPIDefaultToken"
+    "Get-ZoomAPIDefaultToken"
 
     "New-ZoomAPIJWTToken"
     "Save-ZoomAPIJWTToken"

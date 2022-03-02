@@ -1,7 +1,7 @@
 function Remove-ZoomAPIMeeting {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true, ParameterSetName="MeetingID")]
         [String]$MeetingId

@@ -1,7 +1,7 @@
 function Add-ZoomAPIGroupMembers {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true)]
         [string]$GroupID,

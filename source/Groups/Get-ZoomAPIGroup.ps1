@@ -1,7 +1,7 @@
 function Get-ZoomAPIGroup {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         $Token,
         [Parameter(Mandatory=$false)]
         $GroupID

@@ -1,7 +1,7 @@
 function New-ZoomAPIGroup {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true)]
         [string]$Name

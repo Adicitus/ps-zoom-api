@@ -1,7 +1,7 @@
 function New-ZoomAPIMeeting {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true)]
         [String]$UserId,

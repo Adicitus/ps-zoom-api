@@ -1,6 +1,6 @@
 function Get-ZoomAPIMeetingRegistrants {
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true)]
         [String]$MeetingId,

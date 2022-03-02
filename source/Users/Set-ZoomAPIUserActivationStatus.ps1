@@ -1,7 +1,7 @@
 function Set-ZoomAPIUserActivationStatus {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [Parameter(Mandatory=$true, HelpMessage="Internal ID or email of the user to activate/deactivate.")]
         [string]$UserID,

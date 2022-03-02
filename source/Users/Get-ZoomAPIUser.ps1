@@ -1,7 +1,7 @@
 function Get-ZoomAPIUser {
     [CmdletBinding(DefaultParameterSetName="ListUsers")]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         $Token,
         [Parameter(Mandatory=$true, ParameterSetName="SingleUser", HelpMessage="Internal ID or email of the user to retrieve.")]
         [string]$UserID,

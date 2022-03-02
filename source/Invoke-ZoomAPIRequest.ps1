@@ -1,7 +1,7 @@
 function Invoke-ZoomAPIRequest {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory=$false)]
         [PSCustomObject]$Token,
         [ValidateSet("Get", "Post", "Patch", "Delete", "Put")]
         [Parameter(Mandatory=$true,  HelpMessage="The HTTP method to use.")]
@@ -17,6 +17,10 @@ function Invoke-ZoomAPIRequest {
         [Parameter(Mandatory=$false, HelpMessage="Hashtable mapping parameter names to parameter values.")]
         [hashtable]$QueryParamSrc = @{}
     )
+
+    if (!$Token) {
+        $Token = Get-ZoomAPIDefaultToken
+    }
 
     $uri = "https://api.zoom.us/v2/{0}" -f $Endpoint
 
