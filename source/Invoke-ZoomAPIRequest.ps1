@@ -53,28 +53,31 @@ function Invoke-ZoomAPIRequest {
         $requestArgs.Body = $Body
     }
 
+    $response = @{}
+
     $r = try {
         'ZoomAPI {0,-9} {1}' -f $requestArgs.method.toUpper(), $requestArgs.uri | Write-Debug
-        Invoke-WebRequest @requestArgs -UseBasicParsing
+        $r = Invoke-WebRequest @requestArgs -UseBasicParsing
+        $response._raw = $r
     } catch {
-        return $_
+        $response._raw = $_
     }
 
-    $response = @{
-        _raw = $r
-    }
+    $raw = $response._raw
 
-    switch -Regex ($r.GetType().Name) {
+    switch -Regex ($raw.GetType().Name) {
         "^ErrorRecord$" {
-            $d = $r.ErrorDetails.message | ConvertFrom-Json
-            $response.StatusCode = $d.code
+            $d = $raw.ErrorDetails.message | ConvertFrom-Json
+            $raw.Exception.Response.StatusCode | Write-Debug
+            $response.StatusCode = [int]$raw.Exception.Response.StatusCode
+            $response.ErrorCode  = $d.code 
             $response.Content = $d.message
         }
 
         "^(BasicHtmlWebResponseObject|WebResponseObject)$" {
 
-            $response.StatusCode = $r.StatusCode
-            $response.Content = $r.Content | ConvertFrom-UnicodeEscapedString | ConvertFrom-Json
+            $response.StatusCode = $raw.StatusCode
+            $response.Content = $raw.Content | ConvertFrom-UnicodeEscapedString | ConvertFrom-Json
         }
 
         default {
@@ -83,7 +86,7 @@ function Invoke-ZoomAPIRequest {
     }
 
     if ($script:ResponseDetails -eq [ResponseStyle]::ContentOnly) {
-        return $response.content
+        throw [ZoomAPIResponseException]::new($response.StatusCode, $response.ErrorCode, $response.Content)
     } else {
         return $response
     }
