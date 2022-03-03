@@ -15,6 +15,7 @@
     "Get-ZoomAPIGroup"
     "Get-ZoomAPIGroupMembers"
     "New-ZoomAPIGroup"
+    "Remove-ZoomAPIGroup"
     "Remove-ZoomAPIGroupMember"
     "Set-ZoomAPIGroup"
 
