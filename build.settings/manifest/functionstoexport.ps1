@@ -5,6 +5,8 @@
     "Set-ZoomAPIDefaultToken"
     "Get-ZoomAPIDefaultToken"
 
+    "Get-ZoomAPIPlanUsageReport"
+
     "New-ZoomAPIJWTToken"
     "Save-ZoomAPIJWTToken"
     "Restore-ZoomAPIJWTToken"
