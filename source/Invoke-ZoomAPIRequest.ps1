@@ -90,7 +90,7 @@ function Invoke-ZoomAPIRequest {
     }
 
     if ($script:ResponseDetails -eq [ResponseStyle]::ContentOnly) {
-        if ($esponse.ErrorCode) {
+        if ($response.ErrorCode) {
             throw [ZoomAPIResponseException]::new($response.StatusCode, $response.ErrorCode, $response.Content)
         }
         return $response.Content
