@@ -1,10 +1,11 @@
 function Restore-ZoomAPIJWTToken {
     [CmdletBinding()]
     param(
-        $Path
+        [Parameter(Mandatory=$true, position=1)]
+        [string]$Path
     )
 
-    $c = Get-Content $Path
+    $c = Get-Content $Path -Encoding UTF8
     $ts = $c | ConvertTo-SecureString | Unlock-SecureString
 
     $t = $ts | ConvertFrom-Json
